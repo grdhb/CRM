@@ -31,12 +31,23 @@ Route::prefix('Login')->group(function () {
 });
 //客户
 Route::prefix('User')->group(function () {
-    Route::get('index', 'User\UserController@index');
-    Route::get('list', 'User\UserController@list');
+    Route::any('index', 'User\UserController@index');
+    Route::any('list', 'User\UserController@list');
+    Route::any('checkName', 'User\UserController@checkName');
+    Route::any('add_do', 'User\UserController@add_do');
+    Route::any('del/{id}', 'User\UserController@del');
+    Route::get('update/{id}','User\UserController@update');
+    Route::post('update_do/{id}','User\UserController@update_do');
+
 });
+
 //产品分类
 Route::prefix('Goods')->group(function () {
+    //产品添加
     Route::get('index', 'Goods\GoodsController@index');
+    Route::post('doadd', 'Goods\GoodsController@doadd');
+    //删除
+    Route::any('del','Goods\GoodsController@del');
     Route::get('list', 'Goods\GoodsController@list');
 });
 //供应商
