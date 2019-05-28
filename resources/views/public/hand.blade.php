@@ -6,8 +6,16 @@
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
             <title>layout 后台大布局 - Layui</title>
             <link rel="stylesheet" href="/layui/css/layui.css">
+<<<<<<< HEAD
             <link rel="stylesheet" href="/static/page.css">
             <script src="/js/jquery-3.3.1.min.js"></script>
+=======
+
+            <link rel="stylesheet" href="/static/page.css">
+            <script src="/layui/layui.js"></script>
+            <script src='/js/jquery-3.3.1.min.js'></script>
+
+>>>>>>> 32707f455b5449d8bccfaaafd30fd3a99e69b7a4
         </head>
 
         <body class="layui-layout-body">
