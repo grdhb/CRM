@@ -3,7 +3,6 @@
             © layui.com - 底部固定区域
         </div>
         </div>
-        
         <script>
             //JavaScript代码区域
             layui.use('element', function() {

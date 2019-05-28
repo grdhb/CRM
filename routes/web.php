@@ -24,14 +24,23 @@ Route::prefix('Login')->group(function () {
     Route::get('login', 'Login\LoginController@index');
     //注册
     Route:: get('register', 'Login\RegisterController@index');
+    Route:: post('addregister', 'Login\RegisterController@addregister');
+    Route:: post('send', 'Login\RegisterController@send');
     //退出
     Route:: get( 'logout', 'Login\LoginController@logout');
 });
 //客户
 Route::prefix('User')->group(function () {
-    Route::get('index', 'User\UserController@index');
-    Route::get('list', 'User\UserController@list');
+    Route::any('index', 'User\UserController@index');
+    Route::any('list', 'User\UserController@list');
+    Route::any('checkName', 'User\UserController@checkName');
+    Route::any('add_do', 'User\UserController@add_do');
+    Route::any('del/{id}', 'User\UserController@del');
+    Route::get('update/{id}','User\UserController@update');
+    Route::post('update_do/{id}','User\UserController@update_do');
+
 });
+
 //产品分类
 Route::prefix('Goods')->group(function () {
     //产品添加
