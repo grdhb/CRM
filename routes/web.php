@@ -40,4 +40,11 @@ Route::prefix('Goods')->group(function () {
 //供应商
 Route::prefix('Supplier')->group(function () {
     Route::get('index', 'Supplier\SupplierController@index');
+    Route::any('list','Supplier\SupplierController@list');
+    Route::any('add','Supplier\SupplierController@add');
+    Route::any('del/{s_id}','Supplier\SupplierController@del');
+    Route::any('edit/{s_id}','Supplier\SupplierController@edit');
+    Route::any('checkname','Supplier\SupplierController@checkname');
+    Route::post('update/{s_id}','Supplier\SupplierController@update');
+    
 });
