@@ -9,6 +9,7 @@ class UserController extends Controller
 {
     //用户
     public function index(){
+    	echo 231;
     	 //查询省份
         return view('User/add');
     }
@@ -47,6 +48,7 @@ class UserController extends Controller
     //列表
     public function list()
     {
+
     	$query=request()->all();
     	$where=[];
         $u_name=$query['u_name']??'';
