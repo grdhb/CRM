@@ -112,27 +112,27 @@
             var repwd=$("#repwd").val();
 
             if(username==''){
-                layer.msg('邮箱不能为空');
+                layer.msg('邮箱不能为空',{icon:2});
                 return false;
             }
             if(code==''){
-                layer.msg('验证码不能为空');
+                layer.msg('验证码不能为空',{icon:2});
                 return false;
             }
             if(pwd==''){
-                layer.msg('密码不能为空');
+                layer.msg('密码不能为空',{icon:2});
                 return false;
             }
             if(repwd==''){
-                layer.msg('确认密码不能为空');
+                layer.msg('确认密码不能为空',{icon:2});
                 return false;
             }
             if(pwd != repwd){
-                layer.msg('密码与确认密码不一致');
+                layer.msg('密码与确认密码不一致',{icon:2});
                 return false;
             }
             if(pwd.length<6){
-                layer.msg('密码不能小于6位');
+                layer.msg('密码不能小于6位',{icon:2});
                 return false;
             }
 
@@ -147,9 +147,9 @@
                 {username:username,code:code,pwd:pwd,repwd:repwd},
                 function(msg){
                     if(msg.code==2){
-                        layer.msg(msg.font);
+                        layer.msg(msg.font,{icon:2});
                     }else{
-                        layer.msg(msg.font);
+                        layer.msg(msg.font,{icon:1});
                         window.location.href="/Login/login";
                     }
                 },
@@ -161,7 +161,7 @@
         $("#span_email").click(function(){
             var username=$("#email").val();
             if(username==''){
-                layer.msg('邮箱不能为空');
+                layer.msg('邮箱不能为空',{icon:2});
                 return false;
             }
                //令牌
@@ -175,7 +175,7 @@
                 {username:username},
                 function(msg){
                     if(msg.code==2){
-                        layer.msg(msg.font);
+                        layer.msg(msg.font,{icon:2});
                     }
                 },
                 'json'
