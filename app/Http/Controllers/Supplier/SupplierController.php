@@ -11,13 +11,14 @@ class SupplierController extends Controller
     //供应商
     public function index()
     {
-        echo 123;
+        echo 456;
         return view( 'Supplier/add');
 
     }
     //添加
     public function add(Request $request)
     {
+        echo 45666;
        $data = $request->all();
        $data['created_at'] = time();
        $res = DB::table('admin_supplier')->insert($data);
