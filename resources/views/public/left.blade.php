@@ -13,7 +13,7 @@
                         <a href="javascript:;">产品管理</a>
                         <dl class="layui-nav-child">
                             <dd><a href="{{url('Goods/index')}}">产品添加</a></dd>
-                            <dd><a href="{{url('User/list')}}">产品展示</a></dd>
+                            <dd><a href="{{url('Goods/list')}}">产品展示</a></dd>
                             <dd><a href="#">产品分类</a></dd>
                         </dl>
                     </li>
