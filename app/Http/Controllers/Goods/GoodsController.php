@@ -15,6 +15,7 @@ class GoodsController extends Controller
     	// print_r($cateInfo);die;
     	$supplierInfo=DB::table('supplier')->get();
         return view('Goods/add',compact('cateInfo','supplierInfo'));
+        //
     }
     //执行添加
     public function doadd()
