@@ -2,6 +2,7 @@
 <html>
 
 <head lang="en">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="UTF-8">
     <title>注册</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -44,56 +45,29 @@
                                 <div class="user-email">
                                     <label for="email"><i class="am-icon-envelope-o"></i></label>
 
-                                    <input type="email" name="" id=""  placeholder="请输入邮箱账号">
+                                    <input type="email" name="" id="email"  placeholder="请输入邮箱账号">
                                 </div>
                                 <div class="verification">
                                     <label for="email_code"><i class="am-icon-code-fork"></i></label>
-                                    <input type="text" name=""  id="" placeholder="请输入验证码">
+                                    <input type="text" name=""  id="code" placeholder="请输入验证码">
                                     <a class="btn" href="javascript:void(0);" id="sendEmailCode">
                                         <span class="dyButton" id="span_email">获取</span>
                                     </a>
                                 </div>
                                 <div class="user-pass">
                                     <label for="email_pwd"><i class="am-icon-lock"></i></label>
-                                    <input type="password"  name="" id="" placeholder="设置密码">
+                                    <input type="password"  name="" id="pwd" placeholder="设置密码">
                                 </div>
                                 <div class="user-pass">
                                     <label for="email_pwd1"><i class="am-icon-lock"></i></label>
-                                    <input type="password"  name="" id="" placeholder="确认密码">
+                                    <input type="password"  name="" id="repwd" placeholder="确认密码">
                                 </div>
                                 <div class="am-cf">
                                     <input type="button" lay-submit lay-filter="telDemo" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl">
                                 </div>
                             </form>
                         </div>
-                        <!--手机号注册-->
-                        <div class="am-tab-panel">
-                            <form method="post" class="layui-form">
-                                <div class="user-phone">
-                                    <label for="tel"><i class="am-icon-mobile-phone am-icon-md"></i></label>
-                                    <input type="tel" name="user_tel" lay-verify="required|phone" id="tel" placeholder="请输入手机号">
-                                </div>
-                                <div class="verification">
-                                    <label for="tel_code"><i class="am-icon-code-fork"></i></label>
-                                    <input type="tel" name="user_code" lay-verify="required" id="tel_code" placeholder="请输入验证码">
-                                    <a class="btn" href="javascript:void(0);" id="sendTelCode">
-                                        <span class="dyButton" id="span_tel">获取</span>
-                                    </a>
-                                </div>
-                                <div class="user-pass">
-                                    <label for="tel_pwd"><i class="am-icon-lock"></i></label>
-                                    <input type="password" name="user_pwd" lay-verify="checkpwd" id="tel_pwd" placeholder="设置密码">
-                                </div>
-                                <div class="user-pass">
-                                    <label for="tel_pwd1"><i class="am-icon-lock"></i></label>
-                                    <input type="password" name="user_pwd1" lay-verify="checkpwd1" id="tel_pwd1" placeholder="确认密码">
-                                </div>
-                                <div class="am-cf">
-                                    <input type="button" lay-submit lay-filter="telDemo" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl">
-                                </div>
-                            </form>
-
-                        </div>
+                        
                     </div>
                 </div>
 
@@ -124,3 +98,89 @@
 </body>
 
 </html>
+<script src="/static/layui/jquery-3.2.1.min.js" charset="utf-8"></script>
+<script src="/layui/layui.js" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script>
+     layui.use(['form', 'layedit', 'upload'], function(){
+        $(".am-btn-sm").click(function(){
+            // layer.msg(1);
+            // alert(1);
+            var username=$("#email").val();
+            var code=$("#code").val();
+            var pwd=$("#pwd").val();
+            var repwd=$("#repwd").val();
+
+            if(username==''){
+                layer.msg('邮箱不能为空',{icon:2});
+                return false;
+            }
+            if(code==''){
+                layer.msg('验证码不能为空',{icon:2});
+                return false;
+            }
+            if(pwd==''){
+                layer.msg('密码不能为空',{icon:2});
+                return false;
+            }
+            if(repwd==''){
+                layer.msg('确认密码不能为空',{icon:2});
+                return false;
+            }
+            if(pwd != repwd){
+                layer.msg('密码与确认密码不一致',{icon:2});
+                return false;
+            }
+            if(pwd.length<6){
+                layer.msg('密码不能小于6位',{icon:2});
+                return false;
+            }
+
+                //令牌
+            $.ajaxSetup({
+                 headers: {
+                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                 }
+                });
+            $.post(
+                "/Login/addregister",
+                {username:username,code:code,pwd:pwd,repwd:repwd},
+                function(msg){
+                    if(msg.code==2){
+                        layer.msg(msg.font,{icon:2});
+                    }else{
+                        layer.msg(msg.font,{icon:1});
+                        window.location.href="/Login/login";
+                    }
+                },
+                'json'
+                );
+            
+        });
+        //点击发送验证码
+        $("#span_email").click(function(){
+            var username=$("#email").val();
+            if(username==''){
+                layer.msg('邮箱不能为空',{icon:2});
+                return false;
+            }
+               //令牌
+            $.ajaxSetup({
+                 headers: {
+                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                 }
+                });
+             $.post(
+                "/Login/send",
+                {username:username},
+                function(msg){
+                    if(msg.code==2){
+                        layer.msg(msg.font,{icon:2});
+                    }
+                },
+                'json'
+                );
+
+        });
+     });
+</script>

@@ -24,6 +24,8 @@ Route::prefix('Login')->group(function () {
     Route::get('login', 'Login\LoginController@index');
     //注册
     Route:: get('register', 'Login\RegisterController@index');
+    Route:: post('addregister', 'Login\RegisterController@addregister');
+    Route:: post('send', 'Login\RegisterController@send');
     //退出
     Route:: get( 'logout', 'Login\LoginController@logout');
 });
@@ -41,7 +43,11 @@ Route::prefix('User')->group(function () {
 
 //产品分类
 Route::prefix('Goods')->group(function () {
+    //产品添加
     Route::get('index', 'Goods\GoodsController@index');
+    Route::post('doadd', 'Goods\GoodsController@doadd');
+    //删除
+    Route::any('del','Goods\GoodsController@del');
     Route::get('list', 'Goods\GoodsController@list');
 });
 //供应商
