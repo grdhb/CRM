@@ -36,14 +36,15 @@
                 <div class="clear"></div>
 
                 <div class="login-form">
-                    <form>
+                    <form action="" method="post" class="reg-login">
+                         <meta name="csrf-token" content="{{ csrf_token() }}">
                         <div class="user-name">
                             <label for="user_name"><i class="am-icon-user"></i></label>
-                            <input type="text" id="user_name" value="" placeholder="手机号/邮箱">
+                            <input type="text" class="username" name="username" placeholder="手机号/邮箱">
                         </div>
                         <div class="user-pass">
                             <label for="password"><i class="am-icon-lock"></i></label>
-                            <input type="password" id="password" value="" placeholder="请输入密码">
+                            <input type="password" name="pwd" class="pwd" placeholder="请输入密码">
                         </div>
                     </form>
                 </div>
@@ -57,7 +58,7 @@
                     <br />
                 </div>
                 <div class="am-cf">
-                    <input type="button" name="" value="登 录" id="btn" class="am-btn am-btn-primary am-btn-sm">
+                    <input type="submit" name="" value="登 录" id="btn" class="btn_ok btn_yes">
                 </div>
         </div>
     </div>
@@ -68,8 +69,7 @@
                 <b>|</b>
                 <a href="# ">商城首页</a>
                 <b>|</b>
-                <a href="# ">支付宝</a>
-                <b>|</b>
+                <a href="# ">支付宝</a>i
                 <a href="# ">物流</a>
             </p>
         </div>
@@ -79,10 +79,49 @@
                 <a href="# ">合作伙伴</a>
                 <a href="# ">联系我们</a>
                 <a href="# ">网站地图</a>
-                <em>© 2015-2025 Hengwang.com 版权所有. 更多模板 <a href="#" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></em>
+                <em>© 2015-2025 Hengwang.com 版权所有. 更多模板 <a href="#" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板b83</a></em>
             </p>
         </div>
     </div>
 </body>
 
 </html>
+<script type="text/javascript">
+  $(function(){
+    layui.use(['form'],function(){
+    $('.btn_yes').click(function(){
+      // alert(0);
+      var username=$('.username').val();
+      var pwd=$('.pwd').val();
+      // alert(username);
+      
+    
+      $.ajaxSetup({
+       headers: {
+       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+       }
+      });
+
+
+         
+       $.post(
+            '/Login/aaa_do',
+            {username:username,pwd:pwd},
+            function(res){
+              // console.log(res);
+              if(res.code==1){
+                layer.msg(res.font,{icon:res.code});
+
+               location.href="{{url('/')}}";
+              }else{
+                layer.msg(res.font,{icon:res.code});
+
+              }
+            },
+            'json'
+        ); 
+        return false;
+    })
+    })
+  });
+</script>

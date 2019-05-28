@@ -22,6 +22,7 @@ Route::get('/', function () {
 Route::prefix('Login')->group(function () {
     //登入
     Route::get('login', 'Login\LoginController@index');
+    Route::post('aaa_do','Login\LoginController@aaa_do');
     //注册
     Route:: get('register', 'Login\RegisterController@index');
     //退出
