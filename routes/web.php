@@ -24,6 +24,8 @@ Route::prefix('Login')->group(function () {
     Route::get('login', 'Login\LoginController@index');
     //注册
     Route:: get('register', 'Login\RegisterController@index');
+    Route:: post('addregister', 'Login\RegisterController@addregister');
+    Route:: post('send', 'Login\RegisterController@send');
     //退出
     Route:: get( 'logout', 'Login\LoginController@logout');
 });
