@@ -13,17 +13,15 @@ class LoginController extends Controller
         return view('login/login');
     }
     //登录执行
-    public function aaa_do(){
+    public function aaa_do()
+    {
     	// echo "1111";
-
-
-
-
         $username = request()->username;
         $pwd = request()->pwd;
         $pwd=md5($pwd);
         // dump($username);
         // dd($pwd);
+        // ffff
         $res=DB::table('register')->where('username','=',$username)->where('pwd','=',$pwd)->first();
         // dd($res);
         if($res){
@@ -31,8 +29,13 @@ class LoginController extends Controller
             echo json_encode(['code'=>1,'font'=>'登录成功']);
         }else{
             echo json_encode(['code'=>2,'font'=>'登录失败']);
+            //sdddddd
         } 
     }
+
+
+
+
     //退出
     public function logout(){
         // echo "别点了自己做";
