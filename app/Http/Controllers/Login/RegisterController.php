@@ -39,7 +39,7 @@ class RegisterController extends Controller
 
     	$row=Register::create($post);
     	if($row){
-    		echo json_encode(['code'=>1,'font'=>'注册成功789']);
+    		echo json_encode(['code'=>1,'font'=>'注册成功']);
     	}
 
    
