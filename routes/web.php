@@ -34,7 +34,11 @@ Route::prefix('User')->group(function () {
 });
 //产品分类
 Route::prefix('Goods')->group(function () {
+    //产品添加
     Route::get('index', 'Goods\GoodsController@index');
+    Route::post('doadd', 'Goods\GoodsController@doadd');
+    //删除
+    Route::any('del','Goods\GoodsController@del');
     Route::get('list', 'Goods\GoodsController@list');
 });
 //供应商
